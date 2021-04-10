@@ -3,9 +3,10 @@ import discord
 import random
 from discord.ext import commands
 with open("token.txt", "r") as tf:
-    TOKEN = tf.readline()
+    TOKEN_LIST = tf.readlines()
+TOKEN = "".join(map(str.strip, TOKEN_LIST))
 
-#client = discord.Client()
+
 Bot = commands.Bot(command_prefix="!")
 @Bot.event
 async def on_ready():
@@ -22,7 +23,7 @@ async def hello(ctx):
 
 @Bot.command()
 async def Ti_lox(ctx):
-    await ctx.send("Ах ты собака дурак идиот да чтоб ты сгорел говно собачье")
+    await ctx.send("Ах ты собака дурак идиот да чтоб ты сгорел говно")
 @Bot.command(name="randint")
 async def my_randint(ctx, min_int, max_int):
     num = random.randint(int(min_int), int(max_int))
