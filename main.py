@@ -11,7 +11,7 @@ TOKEN = "".join(map(str.strip, TOKEN_LIST))
 Bot = commands.Bot(command_prefix="!")
 
 WEATHER_API_KEY = "dc972cf9-8a9d-49ca-acca-bdf6f98dc450"
-headers = {"X-Gismeteo-Token":WEATHER_API_KEY}
+headers = {"X-Yandex-API-Key":WEATHER_API_KEY}
 
 def get_coords(toponym_to_find):
     geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
