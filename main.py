@@ -13,8 +13,29 @@ Bot = commands.Bot(command_prefix="!")
 WEATHER_API_KEY = "dc972cf9-8a9d-49ca-acca-bdf6f98dc450"
 headers = {"X-Gismeteo-Token":WEATHER_API_KEY}
 
+def get_coords(toponym_to_find):
+    geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
+
+    geocoder_params = {
+        "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+        "geocode": toponym_to_find,
+        "format": "json"}
+
+    response = requests.get(geocoder_api_server, params=geocoder_params)
+
+    if response:
+        json_response = response.json()
+        toponym = json_response["response"]["GeoObjectCollection"][
+            "featureMember"][0]["GeoObject"]
+        toponym_coodrinates = toponym["Point"]["pos"]
+        return toponym_coodrinates.split(" ")
+    else:
+        return None, None
+
 def weather_response(place):
     coords = ("39.954987", "43.412182")
+    coords = get_coords(place)
+    print("Погода в ", place, coords)
     weather_api_server = "https://api.weather.yandex.ru/v1/forecast?"
     weather_param =  {
         "lon":float(coords[0]),
