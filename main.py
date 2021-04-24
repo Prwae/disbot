@@ -6,7 +6,7 @@ from discord.ext import commands
 with open("token.txt", "r") as tf:
     TOKEN_LIST = tf.readlines()
 TOKEN = "".join(map(str.strip, TOKEN_LIST))
-
+dashes = (1,2,3,4,5,6)
 
 Bot = commands.Bot(command_prefix="!")
 
@@ -79,6 +79,11 @@ async def on_ready():
 @Bot.command(pass_context=True)
 async def hello(ctx):
     await ctx.send("Привет Hello Gracias")
+
+@Bot.command(name='roll_dice')
+async def roll_dice(self, ctx, count):
+    res = [random.choice(dashes) for _ in range(int(count))]
+    await ctx.send(" ".join(res))
 
 @Bot.command(name="current")
 async def current(ctx):
